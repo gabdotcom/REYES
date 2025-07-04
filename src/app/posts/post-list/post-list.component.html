@@ -1,20 +1,49 @@
-<mat-accordion multi="true">
-    <mat-expansion-panel multi *ngFor="let post of posts">
-        <mat-expansion-panel-header>{{post.title}}</mat-expansion-panel-header>
-        <p>{{post}}</p>
-    </mat-expansion-panel>
-</mat-accordion>
+<mat-card class="post-container">
 
-<mat-card>
-    <mat-accordion multi ="true">
-        <mat-expansion-panel multi *ngFor="let post of posts">
-            <mat-expansion-panel-header>{{post.title}}</mat-expansion-panel-header>
-            <p>{{post.content}}</p>
-            <mat-action-row>
-                <button mat-button color="accent">EDIT</button>
-                <button mat-button color="accent">DELETE</button>
-            </mat-action-row>
-        </mat-expansion-panel>
-    </mat-accordion>
-    <p *ngIf="posts.length<=0">No Post Added yet.</p>
+  <!-- Spinner when loading -->
+  <mat-spinner *ngIf="Loading"></mat-spinner>
+
+  <!-- Search input -->
+  <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
+    <mat-label>Search Posts</mat-label>
+    <input matInput [(ngModel)]="searchTerm" placeholder="Enter title or content to search" />
+  </mat-form-field>
+
+  <!-- Posts Accordion -->
+  <mat-accordion [multi]="true" *ngIf="filteredPosts.length > 0 && !Loading">
+    <mat-expansion-panel *ngFor="let post of filteredPosts">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ post.title }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <!-- Post Image -->
+      <div class="post-image" *ngIf="post.imagePath">
+        <img [src]="post.imagePath" [alt]="post.title" />
+      </div>
+
+      <!-- Post Content -->
+      <p class="post-content">{{ post.content }}</p>
+      <mat-action-row *ngIf= "userIsAuthenticated"></mat-action-row>
+
+      <!-- Action Buttons -->
+      <mat-action-row class="action-buttons">
+        <a mat-button color="primary" [routerLink]="['/edit', post.id]">Edit</a>
+        <button mat-button color="warn" (click)="onDelete(post.id)">Delete</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- No Posts Message -->
+  <p *ngIf="filteredPosts.length === 0 && !Loading" class="info-text mat-body-1">No posts available</p>
+
 </mat-card>
+
+<!-- Paginator -->
+<mat-paginator
+  [length]="totalposts"
+  [pageSize]="postperpage"
+  [pageSizeOptions]="pageSizeOption"
+  (page)="onChangedPage($event)">
+</mat-paginator>

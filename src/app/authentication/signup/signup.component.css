@@ -1,0 +1,42 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+mat-card {
+    width: 400px;
+    padding: 20px;
+}
+
+/* Title Styling */
+.signup-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000;
+    /* Light mode */
+}
+
+body.dark-theme .signup-title {
+    color: #fff;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}

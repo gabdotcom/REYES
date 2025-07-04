@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start": "node server.js",
     "dev": "nodemon server.js",
     "start:server": "nodemon server.js"
   },
@@ -23,7 +22,15 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.16.0",
+    "mongoos": "^0.0.1-security",
+    "mongoose": "^8.12.1",
+    "mongoose-unique-validator": "^4.0.1",
+    "multer": "^1.4.5-lts.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
