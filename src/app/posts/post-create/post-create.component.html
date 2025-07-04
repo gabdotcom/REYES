@@ -1,32 +1,54 @@
-<mat-card>
-    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
-        <mat-form-field>
-            <input 
-            matInput type="text"
-            name="title"
-            ngModel
-            required
-            #title="ngModel"
-            minlength="5"
-            placeholder="TItle">
-            <mat-error *ngIf="title.invalid">
-                "Enter a title"</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <textarea 
-            rows="6"
-            matInput
-            name="content"
-            ngModel=""
-            required
-            #content="ngModel"
-            minlength="10"
-            placeholder="Content"></textarea>
-            <mat-error *ngIf="content.invalid">
-                "Enter a content"</mat-error>
-        </mat-form-field>
-        <button mat-raised-button
-        color="primary"
-        type="submit">Save</button>
-    </form>
+<mat-card class="post-form">
+  <mat-spinner *ngIf="Loading"></mat-spinner>
+
+  <form [formGroup]="form" (ngSubmit)="onSavePost()" *ngIf="!Loading" class="form-container">
+    <!-- Title -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="title"
+        placeholder="Enter Title Here"
+      />
+      <mat-error *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+        Title is required and must be at least 3 characters.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Content -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Post Content</mat-label>
+      <textarea
+        matInput
+        rows="6"
+        formControlName="content"
+        placeholder="Enter your post content"
+      ></textarea>
+      <mat-error *ngIf="form.get('content')?.invalid && form.get('content')?.touched">
+        Content is required and must be at least 3 characters.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Image Upload -->
+    <div class="image-upload">
+      <button mat-stroked-button type="button" (click)="filePicker.click()">
+        Pick Image
+      </button>
+      <input
+        type="file"
+        #filePicker
+        (change)="onImagePicked($event)"
+        accept="image/*"
+      />
+      <div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && form.get('image')?.valid">
+        <img [src]="imagePreview" alt="Form image preview" />
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      Save Post
+    </button>
+  </form>
 </mat-card>

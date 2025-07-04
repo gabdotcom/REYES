@@ -1,11 +1,72 @@
-mat-card {
-    margin: 1rem auto;
-    width: 80%;
+/* Card layout */
+.post-form {
+    margin: 80px auto;
+    width: 90%;
     max-width: 800px;
+    padding: 20px;
 }
 
+/* Form layout */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Form fields */
 mat-form-field {
     display: block;
     width: 100%;
-    margin: 1rem 0;
+    margin-bottom: 20px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Buttons */
+button {
+    margin-top: 20px;
+    width: 200px;
+}
+
+/* Spinner */
+mat-spinner {
+    display: block;
+    margin: 40px auto;
+}
+
+/* File input hidden */
+input[type="file"] {
+    display: none;
+}
+
+/* Image Upload section */
+.image-upload {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Preview image */
+.image-preview {
+    height: 5rem;
+    margin-top: 10px;
+}
+
+.image-preview img {
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Dark mode support */
+body.dark-theme .post-form {
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+body.dark-theme .image-preview img {
+    border: 1px solid #555;
 }

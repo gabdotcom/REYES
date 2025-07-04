@@ -1,5 +1,6 @@
-const http = require("http");
+const http = require('http');
 const app = require('./backend/app');
+const { debug } = require('console');
 
 const normalizePort = val => {
     var port = parseInt(val, 10);
@@ -13,6 +14,7 @@ const normalizePort = val => {
     }
 
     return false;
+
 };
 
 const onError = error => {
@@ -20,27 +22,24 @@ const onError = error => {
         throw error;
     }
 
-    const bind = typeof error.port === "string" ? "pipe " + error.port : "port " + error.port;
+    const bind = typeof addr === "string" ? "pipe" + addr : "port" + port;
     switch (error.code) {
         case "EACCES":
-            console.error(bind + " requires elevated privileges");
+            console.error(bind + "requires elevated privileges");
             process.exit(1);
             break;
-
         case "EADDRINUSE":
-            console.error(bind + " is already in use");
+            console.error(bind + "is already in use");
             process.exit(1);
             break;
-
         default:
             throw error;
     }
 };
-
 const onListening = () => {
     const addr = server.address();
-    const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
-    console.log("Listening on " + bind);
+    const bind = typeof addr === "string" ? "pipe" + addr : "port" + port;
+    debug("Listening on " + bind);
 };
 
 const port = normalizePort(process.env.PORT || 3000);

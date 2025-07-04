@@ -1,0 +1,22 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-list li {
+    display: flex;
+    align-items: center;
+}
+
+button[mat-icon-button] {
+    margin-right: 1rem;
+}

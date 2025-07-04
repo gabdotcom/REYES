@@ -1,0 +1,11 @@
+<h2>Change Password</h2>
+<form (ngSubmit)="onChangePassword()" #passwordForm="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Old Password" type="password" name="oldPassword" [(ngModel)]="oldPassword" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="New Password" type="password" name="newPassword" [(ngModel)]="newPassword" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Change Password</button>
+</form>
+<p *ngIf="message">{{ message }}</p>
